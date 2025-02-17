@@ -1,0 +1,58 @@
+:root {
+
+    --button-background-red:#FD6687;
+    --button-background-yellow:#FFCE67;
+    --button-background-white:#FFFFFF;
+
+    --button-border-normal:#000000;
+    --button-border-hover:#5C2DD5;
+
+    --menu-button:#5C2DD5;
+    --menu-button-hover:#FD6687;
+
+
+    --button-border-radius:20px;
+    --button-validation-border-radius:50%;
+
+    --button-padding:20px;
+
+}
+
+.red-play-btn{
+    background-color: var(--button-background-red);
+    display: flex;
+    justify-content: space-around;
+    padding: var(--button-padding);
+    border-radius: var(--button-border-radius);
+
+}
+.yellow-play-btn{
+    background-color: var(--button-background-yellow);
+    display: flex;
+    justify-content: space-around;
+    padding: var(--button-padding);
+    border-radius: var(--button-border-radius);
+}
+.continue-btn{
+    background-color: var(--button-background-white);
+    display: flex;
+    justify-content: center;
+    padding: var(--button-padding);
+    border-radius: var(--button-border-radius);
+}
+.quit-btn{
+    background-color: var(--button-background-red);
+    display: flex;
+    justify-content: center;
+    padding: var(--button-padding);
+    border-radius: var(--button-border-radius);
+}
+.menu-btn{
+    padding: var(--button-padding) 9px;
+    border-radius: var(--button-border-radius);
+}
+.validation-btn{
+    border-radius: var(--button-validation-border-radius);
+    background-color: var(--button-background-red);
+    padding: var(--button-padding);
+}

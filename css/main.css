@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
+
+:root {
+    --font-family-Space-Grotesk:Space Grotesk;
+
+    --color-black:#000000;
+    --color-dark-purple:#5C2DD5;
+    --color-purple:#7945FF;
+    --color-red:#FD6687;
+    --color-yellow:#FFCE67;
+    --color-white:#FFFFFF;
+
+
+    --typography-heading-L:56px;
+    --typography-heading-L-line:71px;
+
+    --typography-heading-M:24px;
+    --typography-heading-M-line:31px;
+
+    --typography-heading-S:20px;
+    --typography-heading-S-line:26px;
+
+    --typography-heading-XS:16px;
+    --typography-heading-XS-line:21px;
+
+
+    --typography-body-text:16px;
+    --typography-body-text-line:21px;
+
+    --typography--heading-weight:700;
+    --typography--body-weight:0;
+
+}
+body{
+    font-family: var(--font-family-Space-Grotesk);
+}
+.heading-L{
+    font-size: var(--typography-heading-L);
+    line-height: var(--typography-heading-L-line);
+    font-weight: var(--typography--heading-weight);
+}
+.heading-M{
+    font-size: var(--typography-heading-M);
+    line-height: var(--typography-heading-M-line);
+    font-weight: var(--typography--heading-weight);
+}
+.heading-S{
+    font-size: var(--typography-heading-S);
+    line-height: var(--typography-heading-S-line);
+    font-weight: var(--typography--heading-weight);
+}
+.heading-XS{
+    font-size: var(--typography-heading-XS);
+    line-height: var(--typography-heading-XS-line);
+    font-weight: var(--typography--heading-weight);
+}
+.body-text{
+    font-size: var(--typography-body-text);
+    line-height: var(--typography-body-text-line);
+    font-weight: var(--typography--body-weight);
+}
