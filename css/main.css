@@ -77,7 +77,7 @@ nav{
 } */
 
 .game-board-space{
-    width: 40%;
+    width: 38%;
     height: 100%;
     position: relative;
 }
@@ -91,7 +91,7 @@ nav{
     display: grid;
     grid-template-columns: repeat(7,1fr);
     grid-template-rows: repeat(6,1fr);
-    width: 91%;
+    width: 95%;
     height: 110%;
 }
 .game-board-top-layer{
@@ -110,5 +110,22 @@ nav{
 .game-board-btn{
     border-radius: 40px;
 }
-.game-board-btn:hover{
+.game-board-btn{
+    background-color: transparent;
+}
+.player-turn{
+    position: absolute;
+    z-index: 3;
+    bottom: 15px;
+    right: 807px;
+    background-color: var(--color-red);
+    background: center / cover url(../assets/player-turn-svg.svg);
+    width: 178px;
+    height: 148px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: var(--color-white);
+    padding-top: 15px;
 }
