@@ -72,3 +72,43 @@ nav{
     align-items: center;
     width: 100%;
 }
+/* main{
+   
+} */
+
+.game-board-space{
+    width: 40%;
+    height: 100%;
+    position: relative;
+}
+.game-board-bottom-layer{
+    position: absolute;
+    z-index: 0;
+}
+.game-board-medium-layer{
+    position: absolute;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    grid-template-rows: repeat(6,1fr);
+    width: 91%;
+    height: 110%;
+}
+.game-board-top-layer{
+    position: absolute;
+    z-index: 2;
+    pointer-events: none;
+}
+.player-and-game-positionner{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60vh;
+    padding-inline:24px ;
+    margin-top: 25px;
+}
+.game-board-btn{
+    border-radius: 40px;
+}
+.game-board-btn:hover{
+}

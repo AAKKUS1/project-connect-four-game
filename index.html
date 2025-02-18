@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./components/button.css">
+    <link rel="stylesheet" href="./components/score-banner.css">
 
 
     <title>connect-four</title>
@@ -14,12 +15,76 @@
 <body>
     <header>
         <nav>
-            <button class="menus-btn"><p class="heading-XS">MENU</p></button>
+            <button class="menus-btn">MENU</button>
                 <img src="./assets/logo.svg">
             <button class="menus-btn"><p class="heading-XS">RESTART</p></button>
         </nav>
     </header>
-    
+    <main>
+        <section class="player-and-game-positionner">
+        <div class="player-card">
+            <img class="player-icon" src="./assets/player-one.svg">
+            <h2 class="heading-S">Player 1</h2>
+            <p role="log" aria-live="polite" class="heading-L" id="player1-score">0</p>
+        </div>
+
+        <section class="game-board-space">
+            <img class="game-board-bottom-layer" src="./assets/black-layer.svg" alt="game-board"></img>
+            <div class="game-board-medium-layer">
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+                <button class="game-board-btn"></button>
+
+            </div>
+            <img class="game-board-top-layer" src="./assets/white-layer.svg" alt="game-board"></img>
+        </section>
+
+        <div class="player-card">
+            <img class="player-icon" src="./assets/player-two.svg">
+            <h2 class="heading-S">Player 2</h2>
+            <p role="log" aria-live="polite" class="heading-L" id="player2-score">0</p>
+        </div>
+    </section>
+    </main>
 
 
     <script src="./app.js"></script>
