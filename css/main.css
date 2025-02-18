@@ -105,7 +105,7 @@ nav{
     justify-content: space-between;
     height: 60vh;
     padding-inline:24px ;
-    margin-top: 25px;
+    margin-top: 10px;
 }
 .game-board-btn{
     border-radius: 40px;
@@ -116,8 +116,8 @@ nav{
 .player-turn{
     position: absolute;
     z-index: 3;
-    bottom: 15px;
-    right: 807px;
+    bottom: 10px;
+    right: 790px;
     background-color: var(--color-red);
     background: center / cover url(../assets/player-turn-svg.svg);
     width: 178px;
