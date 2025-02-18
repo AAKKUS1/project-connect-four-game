@@ -1,58 +1,93 @@
 :root {
+	--button-background-red: #fd6687;
+	--button-background-yellow: #ffce67;
+	--button-background-white: #ffffff;
 
-    --button-background-red:#FD6687;
-    --button-background-yellow:#FFCE67;
-    --button-background-white:#FFFFFF;
+	--button-border-normal: #000000;
+	--button-border-hover: #5c2dd5;
 
-    --button-border-normal:#000000;
-    --button-border-hover:#5C2DD5;
+	--menu-button: #5c2dd5;
+	--menu-button-hover: #fd6687;
 
-    --menu-button:#5C2DD5;
-    --menu-button-hover:#FD6687;
+	--button-border-radius: 20px;
+	--button-validation-border-radius: 50%;
 
+	--button-border-width: 3px;
+	--button-border-bottom: 10px;
 
-    --button-border-radius:20px;
-    --button-validation-border-radius:50%;
-
-    --button-padding:20px;
-
+	--button-padding: 20px;
 }
 
-.red-play-btn{
-    background-color: var(--button-background-red);
-    display: flex;
-    justify-content: space-around;
-    padding: var(--button-padding);
-    border-radius: var(--button-border-radius);
-
+.red-play-btn {
+	background-color: var(--button-background-red);
+	display: flex;
+	justify-content: space-around;
+	padding: var(--button-padding);
+	border-radius: var(--button-border-radius);
+	border: solid var(--button-border-width) var(--button-border-normal);
+	border-bottom: solid var(--button-border-bottom);
 }
-.yellow-play-btn{
-    background-color: var(--button-background-yellow);
-    display: flex;
-    justify-content: space-around;
-    padding: var(--button-padding);
-    border-radius: var(--button-border-radius);
+.red-play-btn:hover {
+	border: solid var(--button-border-width) var(--button-border-hover);
+	border-bottom: solid var(--button-border-bottom) var(--button-border-hover);
 }
-.continue-btn{
-    background-color: var(--button-background-white);
-    display: flex;
-    justify-content: center;
-    padding: var(--button-padding);
-    border-radius: var(--button-border-radius);
+.yellow-play-btn {
+	background-color: var(--button-background-yellow);
+	display: flex;
+	justify-content: space-around;
+	padding: var(--button-padding);
+	border-radius: var(--button-border-radius);
+	border: solid var(--button-border-width) var(--button-border-normal);
+	border-bottom: solid var(--button-border-bottom);
 }
-.quit-btn{
-    background-color: var(--button-background-red);
-    display: flex;
-    justify-content: center;
-    padding: var(--button-padding);
-    border-radius: var(--button-border-radius);
+.yellow-play-btn:hover {
+	border: solid var(--button-border-width) var(--button-border-hover);
+	border-bottom: solid var(--button-border-bottom) var(--button-border-hover);
 }
-.menu-btn{
-    padding: var(--button-padding) 9px;
-    border-radius: var(--button-border-radius);
+.continue-btn {
+	background-color: var(--button-background-white);
+	display: flex;
+	justify-content: center;
+	padding: var(--button-padding);
+	border-radius: var(--button-border-radius);
+	border: solid var(--button-border-width) var(--button-border-normal);
+	border-bottom: solid var(--button-border-bottom);
 }
-.validation-btn{
-    border-radius: var(--button-validation-border-radius);
-    background-color: var(--button-background-red);
-    padding: var(--button-padding);
+.continue-btn:hover {
+	border: solid var(--button-border-width) var(--button-border-hover);
+	border-bottom: solid var(--button-border-bottom) var(--button-border-hover);
+}
+.quit-btn {
+	background-color: var(--button-background-red);
+	display: flex;
+	justify-content: center;
+	padding: var(--button-padding);
+	border-radius: var(--button-border-radius);
+	border: solid var(--button-border-width) var(--button-border-normal);
+	border-bottom: solid var(--button-border-bottom);
+}
+.quit-btn:hover {
+	border: solid var(--button-border-width) var(--button-border-hover);
+	border-bottom: solid var(--button-border-bottom) var(--button-border-hover);
+}
+.menus-btn {
+	padding: 9px var(--button-padding);
+	border-radius: var(--button-border-radius);
+	background-color: var(--menu-button);
+	color: var(--button-background-white);
+	border: none;
+}
+.menus-btn:hover {
+	background-color: var(--button-background-red);
+}
+.validation-btn {
+	border-radius: var(--button-validation-border-radius);
+	background-color: var(--button-background-red);
+	padding: var(--button-padding);
+    border: solid var(--button-border-width) var(--button-border-normal);
+	border-bottom: solid var(--button-border-bottom);
+}
+.validation-btn:hover{
+    border: solid var(--button-border-width) var(--button-border-hover);
+	border-bottom: solid var(--button-border-bottom) var(--button-border-hover);
 }
