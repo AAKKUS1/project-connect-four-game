@@ -1,100 +1,122 @@
 :root {
-	--background-red: #fd6687;
-	--background-yellow: #ffce67;
-	--background-white: #ffffff;
-
-	--border-normal: #000000;
-	--border-hover: #5c2dd5;
-
-	--menu-button: #5c2dd5;
-	--menu-button-hover: #fd6687;
-
-	--border-radius: 20px;
-	--button-validation-border-radius: 50%;
-
-	--border-width: 3px;
-	--border-bottom: 10px;
-
-	--button-padding: 20px;
+    --background-red: #fd6687;
+    --background-yellow: #ffce67;
+    --background-white: #ffffff;
+    --border-normal: #000000;
+    --border-hover: #5c2dd5;
+    --menu-button: #5c2dd5;
+    --menu-button-hover: #fd6687;
+    --border-radius: 20px;
+    --button-validation-border-radius: 50%;
+    --border-width: 3px;
+    --border-bottom-width: 10px; /* Correction ici */
+    --button-padding: 20px;
 }
 
 .red-play-btn {
-	background-color: var(--background-red);
-	display: flex;
-	justify-content: space-around;
-	padding: var(--button-padding);
-	border-radius: var(--border-radius);
-	border: solid var(--border-width) var(--border-normal);
-	border-bottom: solid var(--border-bottom);
-}
-.red-play-btn:hover {
-	border: solid var(--button-border-width) var(--border-hover);
-	border-bottom: solid var(--button-border-bottom) var(--border-hover);
-}
-.yellow-play-btn {
-	background-color: var(--button-background-yellow);
-	display: flex;
-	justify-content: space-around;
-	padding: var(--button-padding);
+    background-color: var(--background-red);
+    display: flex;
+    justify-content: space-around;
+    padding: var(--button-padding);
     border-radius: var(--border-radius);
-	border: solid var(--border-width) var(--border-normal);
-	border-bottom: solid var(--border-bottom);
+    border: solid var(--border-width) var(--border-normal);
+    border-bottom: solid var(--border-bottom-width) var(--border-normal); /* Correction ici */
 }
+
+.red-play-btn:hover {
+    border: solid var(--border-width) var(--border-hover);
+    border-bottom: solid var(--border-bottom-width) var(--border-hover); /* Correction ici */
+}
+
+.yellow-play-btn {
+    background-color: var(--background-yellow);
+    display: flex;
+    justify-content: space-around;
+    padding: var(--button-padding);
+    border-radius: var(--border-radius);
+    border: solid var(--border-width) var(--border-normal);
+    border-bottom: solid var(--border-bottom-width) var(--border-normal); /* Correction ici */
+}
+
 .yellow-play-btn:hover {
-	border: solid var(--button-border-width) var(--button-border-hover);
-	border-bottom: solid var(--button-border-bottom) var(--button-border-hover);
+    border: solid var(--border-width) var(--border-hover);
+    border-bottom: solid var(--border-bottom-width) var(--border-hover); /* Correction ici */
 }
+
 .continue-btn {
-	background-color: var(--button-background-white);
-	display: flex;
-	justify-content: center;
-	padding: var(--button-padding);
-	border-radius: var(--border-radius);
-	border: solid var(--border-width) var(--border-normal);
-	border-bottom: solid var(--border-bottom);
+    background-color: var(--background-white);
+    display: flex;
+    justify-content: center;
+    padding: var(--button-padding);
+    border-radius: var(--border-radius);
+    border: solid var(--border-width) var(--border-normal);
+    border-bottom: solid var(--border-bottom-width) var(--border-normal); /* Correction ici */
+    font-size: var(--typography-heading-M);
+    line-height: var(--typography-heading-M-line);
+    font-weight: var(--typography--heading-weight);
 }
+
 .continue-btn:hover {
-	border: solid var(--button-border-width) var(--button-border-hover);
-	border-bottom: solid var(--button-border-bottom) var(--button-border-hover);
+    border: solid var(--border-width) var(--border-hover);
+    border-bottom: solid var(--border-bottom-width) var(--border-hover); /* Correction ici */
 }
+
 .quit-btn {
-	background-color: var(--button-background-red);
-	display: flex;
-	justify-content: center;
-	padding: var(--button-padding);
-	border-radius: var(--border-radius);
-	border: solid var(--border-width) var(--border-normal);
-	border-bottom: solid var(--border-bottom);
+    background-color: var(--background-red);
+    display: flex;
+    justify-content: center;
+    padding: var(--button-padding);
+    border-radius: var(--border-radius);
+    border: solid var(--border-width) var(--border-normal);
+    border-bottom: solid var(--border-bottom-width) var(--border-normal); /* Correction ici */
+    font-size: var(--typography-heading-M);
+    line-height: var(--typography-heading-M-line);
+    font-weight: var(--typography--heading-weight);
+    color: white; /* Ajout de la couleur du texte */
 }
+
 .quit-btn:hover {
-	border: solid var(--button-border-width) var(--button-border-hover);
-	border-bottom: solid var(--button-border-bottom) var(--button-border-hover);
+    border: solid var(--border-width) var(--border-hover);
+    border-bottom: solid var(--border-bottom-width) var(--border-hover); /* Correction ici */
 }
+
 .menus-btn {
-	padding: 9px var(--button-padding);
-	border-radius: var(--border-radius);
-	background-color: var(--menu-button);
-	color: var(--background-white);
-	border: none;
+    padding: 9px var(--button-padding);
+    border-radius: var(--border-radius);
+    background-color: var(--menu-button);
+    color: var(--background-white);
+    border: none;
     font-size: var(--typography-heading-XS);
     line-height: var(--typography-heading-XS-line);
     font-weight: var(--typography--heading-weight);
 }
+
 .menus-btn:hover {
-	background-color: var(--background-red);
+    background-color: var(--background-red);
 }
+
 .validation-btn {
-	border-radius: var(--button-validation-border-radius);
-	background-color: var(--button-background-red);
-	padding: var(--button-padding);
+    border-radius: var(--button-validation-border-radius);
+    background-color: var(--background-red);
+    padding: var(--button-padding);
     border-radius: var(--border-radius);
-	border: solid var(--border-width) var(--border-normal);
-	border-bottom: solid var(--border-bottom);
+    border: solid var(--border-width) var(--border-normal);
+    border-bottom: solid var(--border-bottom-width) var(--border-normal); /* Correction ici */
 }
-.validation-btn:hover{
+
+.validation-btn:hover {
     border: solid var(--border-width) var(--border-hover);
-	border-bottom: solid var(--border-bottom) var(--border-hover);
+    border-bottom: solid var(--border-bottom-width) var(--border-hover); /* Correction ici */
 }
-button{
+
+button {
     cursor: pointer;
+}
+
+.game-board-button-player1 {
+    background-color: var(--background-red);
+}
+
+.game-board-button-player2 {
+    background-color: var(--background-yellow);
 }

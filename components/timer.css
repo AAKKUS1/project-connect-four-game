@@ -1,0 +1,27 @@
+#player-turn{
+    position: absolute;
+    z-index: 3;
+    bottom: 40px;
+    right: 785px;
+    width: 178px;
+    height: 148px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding-top: 15px;
+}
+.player-turn-1{
+        background: center / cover url(../assets/player-turn-svg.svg);
+        color: var(--color-white);
+}
+.player-turn-2{
+    background: center / cover url(../assets/player-turn2.svg); 
+    color: var(--color-black);  
+}
+.validation{
+    position: absolute;
+    bottom: -50px;
+    left: 220px;
+    z-index: 30;
+}

@@ -1,7 +1,7 @@
-.player-card{
+.player-card {
     background-color: var(--background-white);
     border: solid var(--border-width) var(--border-normal);
-	border-bottom: solid var(--border-bottom);
+    border-bottom: solid var(--border-bottom-width) var(--border-normal); /* Correction ici */
     border-radius: var(--border-radius);
     display: flex;
     flex-direction: column;
@@ -9,10 +9,10 @@
     justify-content: center;
     gap: 10px;
     position: relative;
- 
     padding: 46px 27px 17px 28px;
 }
-.player-icon{
+
+.player-icon {
     position: absolute;
     z-index: 2;
     top: -30px;

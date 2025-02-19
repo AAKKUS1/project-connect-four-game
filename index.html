@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/main.css">
     <link rel="stylesheet" href="./components/button.css">
     <link rel="stylesheet" href="./components/score-banner.css">
+    <link rel="stylesheet" href="./components/timer.css">
 
 
     <title>connect-four</title>
@@ -31,48 +32,62 @@
         <section class="game-board-space">
             <img class="game-board-bottom-layer" src="./assets/black-layer.svg" alt="game-board"></img>
             <div class="game-board-medium-layer">
+                <div class="grid-col">
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
+                </div>
+                <div class="grid-col">
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
+                </div>
+                <div class="grid-col">
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
+                </div>
+                <div class="grid-col">
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
+                </div>
+                <div class="grid-col">
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
+                </div>
+                <div class="grid-col">
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
+                </div>
+                <div class="grid-col">
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
+                </div>
 
             </div>
             <img class="game-board-top-layer" src="./assets/white-layer.svg" alt="game-board"></img>
@@ -83,10 +98,53 @@
             <h2 class="heading-S">Player 2</h2>
             <p role="log" aria-live="polite" class="heading-L" id="player2-score">0</p>
         </div>
-        <div class="player-turn">
+        <div id="player-turn" class="player-turn-1">
             <p class="heading-XS">player 1s turn</p>
             <p class="heading-L">3s</p>
         </div>
+        <div class="winner-displayer">
+            <p class="heading-XS">PLAYER 1</p>
+            <p class="heading-L">WINS</p>
+            <button class="menus-btn">PLAY AGAIN</button>
+        </div>
+    </section>
+    <div class="style-background"></div>
+    
+
+    <!-- <section class="rules-displayer">
+        <dialog id="rulesDialog">
+            <div class="rules-title">
+             <p class="heading-L">RULES</p>
+            </div>
+            
+            <div class="text-rules-organizer">
+            <p class="heading-S">OBJECTIVE</p>
+            <p class="body-text">Be the first player to connect 4 of the same colored discs in a row (vertically, horizontally, or diagonally).</p>
+        </div>
+        <div>
+            <p class="heading-S">HOW TO PLAY</p>
+            <ol class="body-text">
+                <li >Red goes first in the first game.</li>
+                <li >Players must alternate turns, and only one disc can be dropped in each turn.</li>
+                <li >The game ends when there is a 4-in-a-row or a stalemate.</li>
+                <li >The starter of the previous game goes second on the next game.</li>
+            </ol>
+        </div>
+        <img class="validation" src="./assets/icon-check.svg">
+        </dialog>
+    </section> -->
+
+    <section class="pause-displayer">
+        <dialog class="pauseDialog">
+            <div class="pauseTitle">
+                <p class="heading-L">PAUSE</p>
+            </div>
+            <div class="pauseButtons">
+                <button class="continue-btn">CONTINUE GAME</button>
+                <button class="continue-btn">RESTART</button>
+                <button class="quit-btn">QUIT GAME</button>
+            </div>
+        </dialog>
     </section>
     </main>
 
