@@ -16,7 +16,7 @@
 <body>
     <header>
         <nav>
-            <button class="menus-btn">MENU</button>
+            <button  id="pauseEvent" class="menus-btn">MENU</button>
                 <img src="./assets/logo.svg">
             <button class="menus-btn"><p class="heading-XS">RESTART</p></button>
         </nav>
@@ -102,47 +102,22 @@
             <p class="heading-XS">player 1s turn</p>
             <p class="heading-L">3s</p>
         </div>
-        <div class="winner-displayer">
+        <!-- <div class="winner-displayer">
             <p class="heading-XS">PLAYER 1</p>
             <p class="heading-L">WINS</p>
             <button class="menus-btn">PLAY AGAIN</button>
-        </div>
+        </div> -->
     </section>
     <div class="style-background"></div>
+    </section>
+
     
-
-    <!-- <section class="rules-displayer">
-        <dialog id="rulesDialog">
-            <div class="rules-title">
-             <p class="heading-L">RULES</p>
-            </div>
-            
-            <div class="text-rules-organizer">
-            <p class="heading-S">OBJECTIVE</p>
-            <p class="body-text">Be the first player to connect 4 of the same colored discs in a row (vertically, horizontally, or diagonally).</p>
-        </div>
-        <div>
-            <p class="heading-S">HOW TO PLAY</p>
-            <ol class="body-text">
-                <li >Red goes first in the first game.</li>
-                <li >Players must alternate turns, and only one disc can be dropped in each turn.</li>
-                <li >The game ends when there is a 4-in-a-row or a stalemate.</li>
-                <li >The starter of the previous game goes second on the next game.</li>
-            </ol>
-        </div>
-        <img class="validation" src="./assets/icon-check.svg">
-        </dialog>
-    </section> -->
-
-    <section class="pause-displayer">
-        <dialog class="pauseDialog">
-            <div class="pauseTitle">
-                <p class="heading-L">PAUSE</p>
-            </div>
-            <div class="pauseButtons">
-                <button class="continue-btn">CONTINUE GAME</button>
-                <button class="continue-btn">RESTART</button>
-                <button class="quit-btn">QUIT GAME</button>
+    <section id="main-menu">
+        <dialog class="mainDialog">
+                <img src="./assets/logo.svg">
+                <div>
+                <button id="PVP" class="yellow-play-btn">PLAY VS PLAYER <img src="./assets/player-vs-player.svg"></button>
+                <button id="rules" class="continue-btn">GAME RULES</button>
             </div>
         </dialog>
     </section>
