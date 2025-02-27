@@ -621,50 +621,42 @@ function placeToken() {
 createBoard();
 updateCursorPosition();
 
-function checkWinner(grille) {
-    const rows = grille.length;
-    const cols = grille[0].length;
+function checkWinner(grid) {
+    const numRows = grid.length;
+    const numCols = grid[0].length;
 
-    for (let r = 0; r < rows; r++) {
-        for (let c = 0; c <= cols - 4; c++) {
-            if (grille[r][c] !== "" &&
-                grille[r][c] === grille[r][c + 1] &&
-                grille[r][c] === grille[r][c + 2] &&
-                grille[r][c] === grille[r][c + 3]) {
-                return grille[r][c];
+    function areFourEqual(a, b, c, d) {
+        return a !== "" && a === b && a === c && a === d;
+    }
+
+    for (let row = 0; row < numRows; row++) {
+        for (let col = 0; col < numCols - 3; col++) {
+            if (areFourEqual(grid[row][col], grid[row][col + 1], grid[row][col + 2], grid[row][col + 3])) {
+                return grid[row][col];
             }
         }
     }
 
-    for (let c = 0; c < cols; c++) {
-        for (let r = 0; r <= rows - 4; r++) {
-            if (grille[r][c] !== "" &&
-                grille[r][c] === grille[r + 1][c] &&
-                grille[r][c] === grille[r + 2][c] &&
-                grille[r][c] === grille[r + 3][c]) {
-                return grille[r][c];
+    for (let col = 0; col < numCols; col++) {
+        for (let row = 0; row < numRows - 3; row++) {
+            if (areFourEqual(grid[row][col], grid[row + 1][col], grid[row + 2][col], grid[row + 3][col])) {
+                return grid[row][col];
             }
         }
     }
 
-    for (let r = 0; r <= rows - 4; r++) {
-        for (let c = 0; c <= cols - 4; c++) {
-            if (grille[r][c] !== "" &&
-                grille[r][c] === grille[r + 1][c + 1] &&
-                grille[r][c] === grille[r + 2][c + 2] &&
-                grille[r][c] === grille[r + 3][c + 3]) {
-                return grille[r][c];
+    for (let row = 0; row < numRows - 3; row++) {
+        for (let col = 0; col < numCols - 3; col++) {
+            if (areFourEqual(grid[row][col], grid[row + 1][col + 1], grid[row + 2][col + 2], grid[row + 3][col + 3])) {
+                return grid[row][col];
             }
         }
     }
 
-    for (let r = 3; r < rows; r++) {
-        for (let c = 0; c <= cols - 4; c++) {
-            if (grille[r][c] !== "" &&
-                grille[r][c] === grille[r - 1][c + 1] &&
-                grille[r][c] === grille[r - 2][c + 2] &&
-                grille[r][c] === grille[r - 3][c + 3]) {
-                return grille[r][c];
+    for (let row = 3; row < numRows; row++) {
+        for (let col = 0; col < numCols - 3; col++) {
+            if (areFourEqual(grid[row][col], grid[row - 1][col + 1], grid[row - 2][col + 2], grid[row - 3][col + 3])) {
+                return grid[row][col];
             }
         }
     }
