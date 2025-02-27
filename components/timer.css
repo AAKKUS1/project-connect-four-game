@@ -19,9 +19,3 @@
     background: center / cover url(../assets/player-turn2.svg); 
     color: var(--color-black);  
 }
-.validation{
-    position: absolute;
-    bottom: -50px;
-    left: 220px;
-    z-index: 30;
-}

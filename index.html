@@ -14,18 +14,19 @@
     <title>connect-four</title>
 </head>
 <body>
+    
     <header>
         <nav>
             <button  id="pauseEvent" class="menus-btn">MENU</button>
                 <img src="./assets/logo.svg">
-            <button class="menus-btn"><p class="heading-XS">RESTART</p></button>
+            <button id="second-restart" class="menus-btn"><p class="heading-XS">RESTART</p></button>
         </nav>
     </header>
     <main>
         <section class="player-and-game-positionner">
         <div class="player-card">
             <img class="player-icon" src="./assets/player-one.svg">
-            <h2 class="heading-S">Player 1</h2>
+            <h2  class="heading-S">Player 1</h2>
             <p role="log" aria-live="polite" class="heading-L" id="player1-score">0</p>
         </div>
 
@@ -57,7 +58,7 @@
                 <button class="game-board-btn"></button>
                 </div>
                 <div class="grid-col">
-                <button class="game-board-btn"></button>
+                <button class="game-board-btn"> </button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
                 <button class="game-board-btn"></button>
@@ -90,8 +91,11 @@
                 </div>
 
             </div>
+            
             <img class="game-board-top-layer" src="./assets/white-layer.svg" alt="game-board"></img>
         </section>
+        <img src="./assets/Rectangle (3).svg" id="cursor" class="cursor"></div>
+
 
         <div class="player-card">
             <img class="player-icon" src="./assets/player-two.svg">
@@ -99,16 +103,12 @@
             <p role="log" aria-live="polite" class="heading-L" id="player2-score">0</p>
         </div>
         <div id="player-turn" class="player-turn-1">
-            <p class="heading-XS">player 1s turn</p>
-            <p class="heading-L">3s</p>
+            <p id="player-playing" class="heading-XS">player 1s turn</p>
+            <p class="heading-L" id="timeShower">3s</p>
         </div>
-        <!-- <div class="winner-displayer">
-            <p class="heading-XS">PLAYER 1</p>
-            <p class="heading-L">WINS</p>
-            <button class="menus-btn">PLAY AGAIN</button>
-        </div> -->
+        
     </section>
-    <div class="style-background"></div>
+    <div id="bck-style" class="style-background"></div>
     </section>
 
     
