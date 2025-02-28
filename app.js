@@ -13,15 +13,323 @@ function updateScoreDisplay() {
     document.getElementById("player2-score").textContent = player2Score;
 }
 
-pvpButton.addEventListener("click", () => {
-    mainMenuDisplayer.style.display = "none";
+pvpButton.addEventListener("click", startGame);
+rulesButton.addEventListener("click", displayRules);
+pause.addEventListener("click", displayPauseMenu);
+
+let grille = [
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+    ["", "", "", "", "", "", ""],
+];
+let currentPlayer = "red";
+let timer;
+let timeLeft = 15;
+
+function startTimer() {
+    stopTimer();
+    timeLeft = 15;
+    timerDisplay.textContent = timeLeft;
+
+    timer = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = timeLeft;
+
+        if (timeLeft <= 0) {
+            clearInterval(timer);
+            switchPlayer();
+        }
+    }, 1000);
+}
+
+function stopTimer() {
+    if (timer) {
+        clearInterval(timer);
+        timer = null;
+    }
+}
+
+function switchPlayer() {
+    stopTimer();
+    currentPlayer = currentPlayer === "red" ? "yellow" : "red";
+    startTimer();
+    updatePlayerDisplay();
+}
+
+function updatePlayerDisplay() {
+    const playerDisplay = document.getElementById("player-playing");
+    const playerTimeCard = document.getElementById("player-turn");
+    playerDisplay.textContent = currentPlayer === "red" ? "Player 1's turn" : "Player 2's turn";
+    playerTimeCard.className = currentPlayer === "red" ? "player-turn-1" : "player-turn-2";
+}
+
+function handleMove(event) {
+    const col = event.currentTarget.dataset.col;
+
+    for (let r = 5; r >= 0; r--) {
+        if (grille[r][col] === "") {
+            grille[r][col] = currentPlayer;
+
+            const cell = event.currentTarget.children[r];
+            cell.classList.add(currentPlayer);
+
+            if (checkWinner(grille)) {
+                stopTimer();
+                highlightWinningCells(currentPlayer);
+                displayWinner(currentPlayer);
+            } else if (checkDraw()) {
+                alert("It's a draw!");
+            } else {
+                switchPlayer();
+            }
+            break;
+        }
+    }
+}
+
+function highlightWinningCells(winner) {
+    const rows = grille.length;
+    const cols = grille[0].length;
+
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col <= cols - 4; col++) {
+            if (grille[row][col] === winner &&
+                grille[row][col] === grille[row][col + 1] &&
+                grille[row][col] === grille[row][col + 2] &&
+                grille[row][col] === grille[row][col + 3]) {
+                highlightCells([
+                    [row, col],
+                    [row, col + 1],
+                    [row, col + 2],
+                    [row, col + 3]
+                ]);
+                return;
+            }
+        }
+    }
+
+    for (let col = 0; col < cols; col++) {
+        for (let row = 0; row <= rows - 4; row++) {
+            if (grille[row][col] === winner &&
+                grille[row][col] === grille[row + 1][col] &&
+                grille[row][col] === grille[row + 2][col] &&
+                grille[row][col] === grille[row + 3][col]) {
+                highlightCells([
+                    [row, col],
+                    [row + 1, col],
+                    [row + 2, col],
+                    [row + 3, col]
+                ]);
+                return;
+            }
+        }
+    }
+
+    for (let row = 0; row <= rows - 4; row++) {
+        for (let col = 0; col <= cols - 4; col++) {
+            if (grille[row][col] === winner &&
+                grille[row][col] === grille[row + 1][col + 1] &&
+                grille[row][col] === grille[row + 2][col + 2] &&
+                grille[row][col] === grille[row + 3][col + 3]) {
+                highlightCells([
+                    [row, col],
+                    [row + 1, col + 1],
+                    [row + 2, col + 2],
+                    [row + 3, col + 3]
+                ]);
+                return;
+            }
+        }
+    }
+
+    for (let row = 3; row < rows; row++) {
+        for (let col = 0; col <= cols - 4; col++) {
+            if (grille[row][col] === winner &&
+                grille[row][col] === grille[row - 1][col + 1] &&
+                grille[row][col] === grille[row - 2][col + 2] &&
+                grille[row][col] === grille[row - 3][col + 3]) {
+                highlightCells([
+                    [row, col],
+                    [row - 1, col + 1],
+                    [row - 2, col + 2],
+                    [row - 3, col + 3]
+                ]);
+                return;
+            }
+        }
+    }
+}
+
+function highlightCells(cells) {
+    for (let i = 0; i < cells.length; i++) {
+        const [row, col] = cells[i];
+        const column = document.querySelector(`.grid-col[data-col="${col}"]`);
+        const cell = column.children[row];
+        cell.classList.add("winning-cell");
+    }
+}
+
+function checkWinner(grid) {
+    const rows = grid.length;
+    const cols = grid[0].length;
+
+    function areFourEqual(a, b, c, d) {
+        return a !== "" && a === b && a === c && a === d;
+    }
+
+    for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols - 3; col++) {
+            if (areFourEqual(grid[row][col], grid[row][col + 1], grid[row][col + 2], grid[row][col + 3])) {
+                return true;
+            }
+        }
+    }
+
+    for (let col = 0; col < cols; col++) {
+        for (let row = 0; row < rows - 3; row++) {
+            if (areFourEqual(grid[row][col], grid[row + 1][col], grid[row + 2][col], grid[row + 3][col])) {
+                return true;
+            }
+        }
+    }
+
+    for (let row = 0; row < rows - 3; row++) {
+        for (let col = 0; col < cols - 3; col++) {
+            if (areFourEqual(grid[row][col], grid[row + 1][col + 1], grid[row + 2][col + 2], grid[row + 3][col + 3])) {
+                return true;
+            }
+        }
+    }
+
+    for (let row = 3; row < rows; row++) {
+        for (let col = 0; col < cols - 3; col++) {
+            if (areFourEqual(grid[row][col], grid[row - 1][col + 1], grid[row - 2][col + 2], grid[row - 3][col + 3])) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+function checkDraw() {
+    for (let r = 0; r < grille.length; r++) {
+        for (let c = 0; c < grille[r].length; c++) {
+            if (grille[r][c] === "") {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+function resetGame() {
+    grille = [
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+        ["", "", "", "", "", "", ""],
+    ];
+    currentPlayer = "red";
     createBoard();
     startTimer();
-});
+}
 
-rulesButton.addEventListener("click", () => {
-    mainMenuDisplayer.style.display = "none";
+function createBoard() {
+    const boardDiv = document.querySelector(".game-board-medium-layer");
+    boardDiv.innerHTML = "";
 
+    for (let c = 0; c < 7; c++) {
+        const column = document.createElement("div");
+        column.className = "grid-col";
+        column.dataset.col = c;
+        column.addEventListener("click", handleMove);
+
+        for (let r = 0; r < 6; r++) {
+            const cell = document.createElement("div");
+            cell.className = "grid-cell";
+            column.appendChild(cell);
+        }
+
+        boardDiv.appendChild(column);
+    }
+}
+
+function displayWinner(winner) {
+    timerDisplay.style.display = "none";
+    const playerTimeCard = document.getElementById("player-turn");
+    playerTimeCard.style.display = "none";
+
+    if (winner === "red") {
+        player1Score++;
+    } else {
+        player2Score++;
+    }
+    updateScoreDisplay();
+
+    const winnerDisplayer = document.createElement("div");
+    winnerDisplayer.classList.add("winner-displayer");
+
+    winnerDisplayer.style.width = "270px";
+    winnerDisplayer.style.height = "200px";
+    winnerDisplayer.style.display = "flex";
+    winnerDisplayer.style.flexDirection = "column";
+    winnerDisplayer.style.alignItems = "center";
+    winnerDisplayer.style.justifyContent = "center";
+    winnerDisplayer.style.gap = "0px";
+    winnerDisplayer.style.borderRadius = "20px";
+    winnerDisplayer.style.border = "solid 3px var(--border-normal)";
+    winnerDisplayer.style.backgroundColor = "var(--color-white)";
+    winnerDisplayer.style.position = "absolute";
+    winnerDisplayer.style.zIndex = "5";
+    winnerDisplayer.style.bottom = "-10%";
+    winnerDisplayer.style.left = "50%";
+    winnerDisplayer.style.transform = "translate(-50%, -50%)";
+    winnerDisplayer.style.padding = "20px";
+
+    const playerText = document.createElement("p");
+    playerText.classList.add("heading-XS");
+    playerText.textContent = winner === "red" ? "PLAYER 1" : "PLAYER 2";
+
+    const winText = document.createElement("p");
+    winText.classList.add("heading-L");
+    winText.textContent = "WINS";
+
+    const playAgainButton = document.createElement("button");
+    playAgainButton.classList.add("menus-btn");
+    playAgainButton.textContent = "PLAY AGAIN";
+    playAgainButton.style.padding = "10px 20px";
+    playAgainButton.style.border = "none";
+    playAgainButton.style.backgroundColor = "var(--color-purple)";
+    playAgainButton.style.color = "white";
+    playAgainButton.style.borderRadius = "10px";
+    playAgainButton.style.cursor = "pointer";
+    playAgainButton.style.fontSize = "16px";
+
+    playAgainButton.addEventListener("click", () => {
+        winnerDisplayer.remove();
+        timerDisplay.style.display = "flex";
+        playerTimeCard.style.display = "flex";
+        backgroundstyle.style.backgroundColor = "var(--color-dark-purple)";
+
+        resetGame();
+    });
+
+    winnerDisplayer.appendChild(playerText);
+    winnerDisplayer.appendChild(winText);
+    winnerDisplayer.appendChild(playAgainButton);
+
+    document.body.appendChild(winnerDisplayer);
+
+    backgroundstyle.style.backgroundColor = winner === "red" ? "var(--color-red)" : "var(--color-yellow)";
+}
+
+function displayRules() {
     const section = document.createElement("section");
     section.className = "rules-displayer";
     section.style.backgroundColor = "var(--color-purple)";
@@ -135,9 +443,9 @@ rulesButton.addEventListener("click", () => {
     document.body.appendChild(section);
 
     dialog.showModal();
-});
+}
 
-pause.addEventListener("click", () => {
+function displayPauseMenu() {
     const section = document.createElement("section");
     section.className = "pause-displayer";
     section.style.backgroundColor = "rgba(0, 0, 0, 0.534)";
@@ -192,7 +500,7 @@ pause.addEventListener("click", () => {
     restartBtn.className = "continue-btn";
     restartBtn.textContent = "RESTART";
     restartBtn.style.width = "100%";
-
+    const SecondRestartButton = document.getElementById('second-restart');
     const quitBtn = document.createElement("button");
     quitBtn.className = "quit-btn";
     quitBtn.textContent = "QUIT GAME";
@@ -225,355 +533,23 @@ pause.addEventListener("click", () => {
         updateScoreDisplay();
     });
 
+    SecondRestartButton.addEventListener("click", () => {
+        resetGame();
+    })
     restartBtn.addEventListener("click", () => {
         dialog.close();
         section.remove();
         resetGame();
     });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    const secondRestart = document.getElementById('second-restart');
-    if (secondRestart) {
-        secondRestart.addEventListener("click", resetGame);
-    }
-});
-
-let grille = [
-    ["", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", ""],
-    ["", "", "", "", "", "", ""],
-];
-let currentPlayer = "red";
-let timer;
-let timeLeft = 15;
-
-function startTimer() {
-    stopTimer();
-    timeLeft = 15;
-    timerDisplay.textContent = timeLeft;
-
-    timer = setInterval(() => {
-        timeLeft--;
-        timerDisplay.textContent = timeLeft;
-
-        if (timeLeft <= 0) {
-            clearInterval(timer);
-            switchPlayer();
-        }
-    }, 1000);
 }
 
-function stopTimer() {
-    if (timer) {
-        clearInterval(timer);
-        timer = null;
-    }
-}
-
-function switchPlayer() {
-    stopTimer();
-    currentPlayer = currentPlayer === "red" ? "yellow" : "red";
-    startTimer();
-    const playerdisplayed = document.getElementById("player-playing");
-    const playerTimeCard = document.getElementById("player-turn");
-    if (currentPlayer === "red") {
-        playerdisplayed.textContent = "player 1s turn";
-        playerTimeCard.className = "player-turn-1";
-    } else {
-        playerdisplayed.textContent = "player 2s turn";
-        playerTimeCard.className = "player-turn-2";
-    }
-}
-
-function handleMove(event) {
-    const col = event.currentTarget.dataset.col;
-
-    for (let r = 5; r >= 0; r--) {
-        if (grille[r][col] === "") {
-            grille[r][col] = currentPlayer;
-
-            const cell = event.currentTarget.children[r];
-            cell.classList.add(currentPlayer);
-
-            const winner = checkWinner(grille);
-            if (winner) {
-                stopTimer();
-                highlightWinningCells(winner);
-                displayWinner(winner);
-                return;
-            } else if (checkDraw()) {
-                alert("It's a draw!");
-                return;
-            }
-
-            switchPlayer();
-            break;
-        }
-    }
-}
-
-function highlightWinningCells(winner) {
-    const nombreLignes = grille.length;
-    const nombreColonnes = grille[0].length;
-
-    for (let ligne = 0; ligne < nombreLignes; ligne++) {
-        for (let colonne = 0; colonne <= nombreColonnes - 4; colonne++) {
-            if (grille[ligne][colonne] === winner &&
-                grille[ligne][colonne] === grille[ligne][colonne + 1] &&
-                grille[ligne][colonne] === grille[ligne][colonne + 2] &&
-                grille[ligne][colonne] === grille[ligne][colonne + 3]) {
-                highlightCells([
-                    [ligne, colonne],
-                    [ligne, colonne + 1],
-                    [ligne, colonne + 2],
-                    [ligne, colonne + 3]
-                ]);
-                return;
-            }
-        }
-    }
-
-    for (let colonne = 0; colonne < nombreColonnes; colonne++) {
-        for (let ligne = 0; ligne <= nombreLignes - 4; ligne++) {
-            if (grille[ligne][colonne] === winner &&
-                grille[ligne][colonne] === grille[ligne + 1][colonne] &&
-                grille[ligne][colonne] === grille[ligne + 2][colonne] &&
-                grille[ligne][colonne] === grille[ligne + 3][colonne]) {
-                highlightCells([
-                    [ligne, colonne],
-                    [ligne + 1, colonne],
-                    [ligne + 2, colonne],
-                    [ligne + 3, colonne]
-                ]);
-                return;
-            }
-        }
-    }
-
-    for (let ligne = 0; ligne <= nombreLignes - 4; ligne++) {
-        for (let colonne = 0; colonne <= nombreColonnes - 4; colonne++) {
-            if (grille[ligne][colonne] === winner &&
-                grille[ligne][colonne] === grille[ligne + 1][colonne + 1] &&
-                grille[ligne][colonne] === grille[ligne + 2][colonne + 2] &&
-                grille[ligne][colonne] === grille[ligne + 3][colonne + 3]) {
-                highlightCells([
-                    [ligne, colonne],
-                    [ligne + 1, colonne + 1],
-                    [ligne + 2, colonne + 2],
-                    [ligne + 3, colonne + 3]
-                ]);
-                return;
-            }
-        }
-    }
-
-    for (let ligne = 3; ligne < nombreLignes; ligne++) {
-        for (let colonne = 0; colonne <= nombreColonnes - 4; colonne++) {
-            if (grille[ligne][colonne] === winner &&
-                grille[ligne][colonne] === grille[ligne - 1][colonne + 1] &&
-                grille[ligne][colonne] === grille[ligne - 2][colonne + 2] &&
-                grille[ligne][colonne] === grille[ligne - 3][colonne + 3]) {
-                highlightCells([
-                    [ligne, colonne],
-                    [ligne - 1, colonne + 1],
-                    [ligne - 2, colonne + 2],
-                    [ligne - 3, colonne + 3]
-                ]);
-                return;
-            }
-        }
-    }
-}
-
-function highlightCells(cells) {
-    for (let i = 0; i < cells.length; i++) {
-        const [row, col] = cells[i];
-        const column = document.querySelector(`.grid-col[data-col="${col}"]`);
-        const cell = column.children[row];
-        cell.classList.add("winning-cell");
-    }
-}
-
-function checkWinner(grille) {
-    const nombreLignes = grille.length;
-    const nombreColonnes = grille[0].length;
-
-    for (let ligne = 0; ligne < nombreLignes; ligne++) {
-        for (let colonne = 0; colonne <= nombreColonnes - 4; colonne++) {
-            if (grille[ligne][colonne] !== "" &&
-                grille[ligne][colonne] === grille[ligne][colonne + 1] &&
-                grille[ligne][colonne] === grille[ligne][colonne + 2] &&
-                grille[ligne][colonne] === grille[ligne][colonne + 3]) {
-                return grille[ligne][colonne];
-            }
-        }
-    }
-
-    for (let colonne = 0; colonne < nombreColonnes; colonne++) {
-        for (let ligne = 0; ligne <= nombreLignes - 4; ligne++) {
-            if (grille[ligne][colonne] !== "" &&
-                grille[ligne][colonne] === grille[ligne + 1][colonne] &&
-                grille[ligne][colonne] === grille[ligne + 2][colonne] &&
-                grille[ligne][colonne] === grille[ligne + 3][colonne]) {
-                return grille[ligne][colonne];
-            }
-        }
-    }
-
-    for (let ligne = 0; ligne <= nombreLignes - 4; ligne++) {
-        for (let colonne = 0; colonne <= nombreColonnes - 4; colonne++) {
-            if (grille[ligne][colonne] !== "" &&
-                grille[ligne][colonne] === grille[ligne + 1][colonne + 1] &&
-                grille[ligne][colonne] === grille[ligne + 2][colonne + 2] &&
-                grille[ligne][colonne] === grille[ligne + 3][colonne + 3]) {
-                return grille[ligne][colonne];
-            }
-        }
-    }
-
-    for (let ligne = 3; ligne < nombreLignes; ligne++) {
-        for (let colonne = 0; colonne <= nombreColonnes - 4; colonne++) {
-            if (grille[ligne][colonne] !== "" &&
-                grille[ligne][colonne] === grille[ligne - 1][colonne + 1] &&
-                grille[ligne][colonne] === grille[ligne - 2][colonne + 2] &&
-                grille[ligne][colonne] === grille[ligne - 3][colonne + 3]) {
-                return grille[ligne][colonne];
-            }
-        }
-    }
-
-    return "";
-}
-
-function checkDraw() {
-    for (let r = 0; r < grille.length; r++) {
-        for (let c = 0; c < grille[r].length; c++) {
-            if (grille[r][c] === "") {
-                return false;
-            }
-        }
-    }
-    return true;
-}
-
-function resetGame() {
-    grille = [
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-        ["", "", "", "", "", "", ""],
-    ];
-    currentPlayer = "red";
+function startGame() {
+    mainMenuDisplayer.style.display = "none";
     createBoard();
     startTimer();
 }
 
-function createBoard() {
-    const boardDiv = document.querySelector(".game-board-medium-layer");
-    boardDiv.innerHTML = "";
-
-    for (let c = 0; c < 7; c++) {
-        const column = document.createElement("div");
-        column.className = "grid-col";
-        column.dataset.col = c;
-        column.addEventListener("click", handleMove);
-
-        for (let r = 0; r < 6; r++) {
-            const cell = document.createElement("div");
-            cell.className = "grid-cell";
-            column.appendChild(cell);
-        }
-
-        boardDiv.appendChild(column);
-    }
-}
-
 createBoard();
-
-function displayWinner(winner) {
-    timerDisplay.style.display = "none";
-    const playerTimeCard = document.getElementById("player-turn");
-    playerTimeCard.style.display = "none";
-
-    if (winner === "red") {
-        player1Score++;
-    } else {
-        player2Score++;
-    }
-    updateScoreDisplay();
-
-    const winnerDisplayer = document.createElement("div");
-    winnerDisplayer.classList.add("winner-displayer");
-
-    Object.assign(winnerDisplayer.style, {
-        width: "270px",
-        height: "200px",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        gap: "0px",
-        borderRadius: "20px",
-        border: "solid 3px var(--border-normal)",
-        backgroundColor: "var(--color-white)",
-        position: "absolute",
-        zIndex: "5",
-        bottom: "-10%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        padding: "20px",
-        boxShadow: "0 5px 15px rgba(0, 0, 0, 0.2)",
-    });
-
-    const playerText = document.createElement("p");
-    playerText.classList.add("heading-XS");
-    playerText.textContent = winner === "red" ? "PLAYER 1" : "PLAYER 2";
-
-    const winText = document.createElement("p");
-    winText.classList.add("heading-L");
-    winText.textContent = "WINS";
-
-    const playAgainButton = document.createElement("button");
-    playAgainButton.classList.add("menus-btn");
-    playAgainButton.textContent = "PLAY AGAIN";
-    Object.assign(playAgainButton.style, {
-        padding: "10px 20px",
-        border: "none",
-        backgroundColor: "var(--color-purple)",
-        color: "white",
-        borderRadius: "10px",
-        cursor: "pointer",
-        fontSize: "16px",
-    });
-
-    playAgainButton.addEventListener("click", () => {
-        winnerDisplayer.remove();
-        timerDisplay.style.display = "flex";
-        playerTimeCard.style.display = "flex";
-        backgroundstyle.style.backgroundColor = "var(--color-dark-purple)";
-
-        resetGame();
-    });
-
-    winnerDisplayer.appendChild(playerText);
-    winnerDisplayer.appendChild(winText);
-    winnerDisplayer.appendChild(playAgainButton);
-
-    document.body.appendChild(winnerDisplayer);
-
-    if (winner === "red") {
-        backgroundstyle.style.backgroundColor = "var(--color-red)";
-    } else {
-        backgroundstyle.style.backgroundColor = "var(--color-yellow)";
-    }
-}
-
 updateScoreDisplay();
 
 document.addEventListener("keydown", handleKeyPress);
@@ -616,50 +592,6 @@ function placeToken() {
     const column = columns[currentColumn];
     const event = new Event("click", { bubbles: true });
     column.dispatchEvent(event);
-
 }
-createBoard();
+
 updateCursorPosition();
-
-function checkWinner(grid) {
-    const numRows = grid.length;
-    const numCols = grid[0].length;
-
-    function areFourEqual(a, b, c, d) {
-        return a !== "" && a === b && a === c && a === d;
-    }
-
-    for (let row = 0; row < numRows; row++) {
-        for (let col = 0; col < numCols - 3; col++) {
-            if (areFourEqual(grid[row][col], grid[row][col + 1], grid[row][col + 2], grid[row][col + 3])) {
-                return grid[row][col];
-            }
-        }
-    }
-
-    for (let col = 0; col < numCols; col++) {
-        for (let row = 0; row < numRows - 3; row++) {
-            if (areFourEqual(grid[row][col], grid[row + 1][col], grid[row + 2][col], grid[row + 3][col])) {
-                return grid[row][col];
-            }
-        }
-    }
-
-    for (let row = 0; row < numRows - 3; row++) {
-        for (let col = 0; col < numCols - 3; col++) {
-            if (areFourEqual(grid[row][col], grid[row + 1][col + 1], grid[row + 2][col + 2], grid[row + 3][col + 3])) {
-                return grid[row][col];
-            }
-        }
-    }
-
-    for (let row = 3; row < numRows; row++) {
-        for (let col = 0; col < numCols - 3; col++) {
-            if (areFourEqual(grid[row][col], grid[row - 1][col + 1], grid[row - 2][col + 2], grid[row - 3][col + 3])) {
-                return grid[row][col];
-            }
-        }
-    }
-
-    return "";
-}

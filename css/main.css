@@ -93,9 +93,6 @@ nav {
 	grid-template-rows: repeat(7, 1fr);
 	grid-gap: 5px;
 }
-.game-board-btn:hover {
-	background-color: aqua;
-}
 .game-board-top-layer {
 	position: absolute;
 	z-index: 2;
